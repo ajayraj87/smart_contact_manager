@@ -14,6 +14,7 @@ public class UploadFile {
 	public void uploadProfile(String image) {
 		try {
 //			read data 
+			@SuppressWarnings("resource")
 			FileInputStream is = new FileInputStream("C:\\Users\\hp\\OneDrive\\Pictures\\" + image);
 //			System.out.println("is "+is);
 			byte data[] = new byte[is.available()];
