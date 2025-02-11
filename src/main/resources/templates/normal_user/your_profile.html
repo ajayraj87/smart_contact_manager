@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal_user/base :: layout(~{::section})">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello, about!</title>
+</head>
+<body>
+	<section>
+		<div class="card me-2">
+			<div class="card-body text-center">
+				<!-- Image Container -->
+				<div class="container">
+					<img style="width: 200px; height: 200px" class="my_profile_picture"
+						alt="profile photo" src="" th:src="@{'/image/'+${user.image}}">
+					<h3 class="mt-2">
+						<span th:text="${user.name}"></span>
+					</h3>
+				</div>
+				<!-- Table Container -->
+				<div class="container pt-2">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#USERId</th>
+								<th scope="col"><span th:text="'UID2025-'+${user.id}"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="col">Email</th>
+								<td scope="col"><span th:text="${user.email}"></span></td>
+							</tr>
+							<tr>
+								<th scope="col">Role</th>
+								<td scope="col"><span th:text="${user.role}"></span></td>
+							</tr>
+							<tr>
+								<th scope="col">Account_Active</th>
+								<td scope="col"><span th:text="${user.enebled}"></span></td>
+							</tr>
+							<tr>
+								<th scope="col">About_You</th>
+								<td scope="col"><span th:text="${user.about}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- Button Container -->
+				<div class="container">
+					<div class="d-grid gap-2">
+						<button class="btn btn-danger" type="button" th:onclick="deleteUser()">Delete
+						</button>
+						<button class="btn btn-primary" type="button"><a style="color: white; font-weight: bold;" href="#" th:href="@{/user/update_user}">Update</a></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
+

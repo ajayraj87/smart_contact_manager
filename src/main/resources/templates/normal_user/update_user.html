@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal_user/base :: layout(~{::section})">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello, about!</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<div class="my-card mt-2">
+
+						<!-- check box error -->
+						
+						<h1 class="text-center">Update here</h1>
+
+						<!-- Form Field -->
+
+						<form th:action="@{/user/update_contect}" method="post"
+							th:object="${user}">
+
+							<!-- user name -->
+							<div class="form-group">
+								<label for="exampleInputEmail1" class="form-label ">User
+									Name</label> <input name="name" type="text" class="form-control"
+									id="name_field" aria-describedby="emailHelp"
+									placeholder="Enter Name" th:value="${user.name}" />
+							</div>
+
+							<!-- user email -->
+							<div class="form-group">
+								<label for="exampleInputEmail1" class="form-label">User
+									Email</label> <input name="email" type="email" class="form-control"
+									id="email_field" aria-describedby="emailHelp"
+									placeholder="Enter Email" th:value="${user.email}" />
+							</div>
+
+							<!-- user about -->
+
+							<div class="form-group">
+								<label for="exampleInputEmail1" class="form-label"></label>
+								<textarea name="about" placeholder="Enter something yourself"
+									th:text="${user.about}" class="form-control" rows="8"></textarea>
+							</div>
+
+
+							<!-- show image and user name -->
+
+							<div class="mt-2">
+								<span>Would you like to update your profile? Please
+									upload a file...</span> <img class="my_profile_picture"
+									alt="profile photo" src="" th:src="@{'/image/'+${user.image}}">
+							</div>
+
+							<!-- Profile fields -->
+							<div class="mt-2">
+								<input type="file" name="image" th:value="${user.image}">
+							</div>
+
+							<!-- user button -->
+							<div class="container text-center mt-1">
+								<button type="submit" class="btn bg-primary text-white">Update User</button>
+								<button type="reset" class="btn btn btn-warning text-white">Reset</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
+

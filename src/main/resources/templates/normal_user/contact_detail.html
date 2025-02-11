@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal_user/base :: layout(~{::section})">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello, about!</title>
+</head>
+<body>
+	<section>
+		<div class="card me-2" th:if="${c}">
+			<div class="card-body text-center">
+				<!-- Image Container -->
+				<div class="container">
+					<img style="width: 200px; height: 200px" class="my_profile_picture"
+						alt="profile photo" src="" th:src="@{'/image/'+${c.image}}">
+					<h3 class="mt-2">
+						<span th:text="${c.name + ' (' + c.secondName + ')'}"></span>
+					</h3>
+				</div>
+				<!-- Table Container -->
+				<div class="container pt-2">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#Id</th>
+								<th scope="col"><span th:text="'SCM2025-'+${c.cId}"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="col">Email</th>
+								<td scope="col"><span th:text="${c.email}"></span></td>
+							</tr>
+							<tr>
+								<th scope="col">Phone</th>
+								<td scope="col"><span th:text="'+91'+${c.phone}"></span></td>
+							</tr>
+							<tr>
+								<th scope="col">Word</th>
+								<td scope="col"><span th:text="${c.work}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- Discription Container -->
+				<div class="container">
+					<span th:utext="${c.discription}"></span>
+				</div>
+				<!-- Button Container -->
+				<div class="container mt-2">
+					<div class="d-grid gap-2">
+						<button th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger fw-bold" type="button">Delete</button>
+						<button class="btn btn-primary fw-bold" type="button" th:onclick="|updateContact(${c.cId})|">Update</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Error Contact -->
+		<div class="container"></div>
+		<h1 class="text-center p-2 me-2"
+			style="background: red; color: white;" th:unless="${c}">You
+			can't see everyone,s contact!!</h1>
+	</section>
+</body>
+</html>
+

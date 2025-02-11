@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal_user/base :: layout(~{::section})">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello, about!</title>
+</head>
+<body>
+	<section>
+		<div class="card me-2">
+			<div class="card-body">
+			<!-- http session error handler -->
+				<div th:if="${session.message}" class="container text-center">
+				    <div th:classappend="${session.message.type}" class="alert alert-success" role="alert">
+				        <span th:text="${session.message.content}"></span>
+					</div>
+					<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+				</div>
+				<h1 class="text-center">Add Contact</h1>
+				<div class="container-fluid ">
+					<div class="row">
+						<div class="col-md-10 offset-md-1">
+
+							<!-- Add Contact Form -->
+
+							<form action="#" th:action="@{/user/process_contact}"
+								method="post"
+								th:object="${contact}" class="mt-2">
+								<!-- First Name -->
+
+								<div class="input-group flex-nowrap mt-2">
+									<span class="input-group-text" id="firstName"><i
+										class="fa fa-plus"></i></span> <input required type="text" name="name"
+										placeholder="Enter Name Here"
+										th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
+										class="form-control">
+								</div>
+								<div class="text-danger" th:each="e:${#fields.errors('name')}"
+									th:text="${e}"></div>
+
+								<!-- Second Name -->
+
+								<div class="input-group flex-nowrap mt-2">
+									<span class="input-group-text" id="SecondName"> <i
+										class="fa fa-user" aria-hidden="true"></i>
+									</span> <input required type="text" name="secondName"
+										placeholder="Enter Nick Name Here"
+										th:classappend="${#fields.hasErrors('secondName')} ? 'is-invalid' : '' "
+										class="form-control">
+								</div>
+								<div class="text-danger"
+									th:each="e:${#fields.errors('secondName')}" th:text="${e}"></div>
+
+								<!-- Phone Field -->
+
+								<div class="input-group flex-nowrap mt-2">
+									<span required class="input-group-text" id="PhoneNumber"> <i
+										class="fa fa-phone" aria-hidden="true"></i>
+									</span> <input type="text" name="phone"
+										th:classappend="${#fields.hasErrors('phone')} ? 'is-invalid' : '' "
+										placeholder="Enter Phone Number Here" class="form-control">
+								</div>
+								<div class="text-danger"
+									th:each="e : ${#fields.errors('phone')}" th:text="${e}"></div>
+
+								<!-- Email Field -->
+
+								<div class="input-group flex-nowrap mt-2">
+									<span class="input-group-text" id="email"><b>@</b></span>
+									<input required type="email" name="email"
+										th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : '' "
+										placeholder="Enter email Here" class="form-control">
+								</div>
+								<div class="text-danger"
+									th:each="e : ${#fields.errors('email')}" th:text="${e}"></div>
+
+								<!-- Work Field -->
+
+								<div class="input-group flex-nowrap mt-2">
+									<span class="input-group-text" id="work"> <i
+										class="fa fa-briefcase" aria-hidden="true"></i>
+									</span> <input required type="text" name="work" placeholder="Enter work Here"
+										th:classappend="${#fields.hasErrors('work')} ? 'is-invalid' : '' "
+										class="form-control">
+								</div>
+								<div class="text-danger" th:each="e : ${#fields.errors('work')}"
+									th:text="${e}"></div>
+
+								<!-- Discription Field -->
+
+								<div class="form-group mt-2">
+									<textarea name="discription"
+									    id="textarea"
+										placeholder="Enter contact discription" class="form-control"
+										th:classappend="${#fields.hasErrors('discription')} ? 'is-invalid' : '' "
+										rows="10"></textarea>
+								</div>
+								<div class="text-danger"
+									th:each="e : ${#fields.errors('discription')}" th:text="${e}"></div>
+
+								<!-- Contact Image -->
+
+								<div class="custom-file mt-2">
+									<input type="file" name="image" />
+									<div class="text-danger"
+										th:each="e : ${#fields.errors('image')}" th:text="${e}"></div>
+
+								</div>
+
+								<!-- Contact Button -->
+
+								<div class="container text-center ">
+									<button type="submit" class="btn btn-outline-primary">Save
+										Contact</button>
+								</div>
+
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Place the first <script> tag in your HTML's <head> -->
+<script src="https://cdn.tiny.cloud/1/4a3hl0asth3by0f7545evnzdthr52fiuy7gumr5tai082kck/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+<script>
+  tinymce.init({
+    selector: '#textarea',
+    plugins: [
+      // Core editing features
+      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+      // Your account includes a free trial of TinyMCE premium features
+      // Try the most popular premium features until Jan 6, 2025:
+      'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+    ],
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+  });
+</script>
+
+	</section>
+
+</body>
+</html>
+
